@@ -86,7 +86,7 @@ export default function StickyHeadTable({ rows }: { rows: Users }) {
           <TableBody>
             {usersRows
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row) => {
+              .map((row: any) => {
                 return (
                   <TableRow hover role="checkbox" tabIndex={-1} key={row._id}>
                     {columns.map((column) => {
