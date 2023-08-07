@@ -12,10 +12,8 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { useState } from "react";
 
 import Swal from "sweetalert2";
-import swal from "sweetalert";
 
 import { useSession } from "next-auth/react";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 interface Column {
   id: "name" | "email" | "role" | "actions";
@@ -110,6 +108,8 @@ export default function StickyHeadTable({ rows }: { rows: Users }) {
                                   confirmButtonColor: "#d33",
                                   cancelButtonColor: "#3085d6",
                                   confirmButtonText: "Delete",
+                                  timer: 5000,
+                                  timerProgressBar: true,
                                 }).then((response) => {
                                   if (response.isConfirmed && userData?.id) {
                                     var myHeaders = new Headers();
@@ -143,12 +143,13 @@ export default function StickyHeadTable({ rows }: { rows: Users }) {
                                             "There was an error from the server."
                                           );
                                         }
-                                        swal({
+                                        Swal.fire({
                                           title:
-                                            "User " +
-                                            row.name +
-                                            " was deleted.",
-                                          text: "User role: " + row.role,
+                                            "User was succesfully deleted.",
+                                          html:
+                                            `Name: <b>${row.name}</b> <br/>` +
+                                            `Role: <b>${row.role}</b> <br/>` +
+                                            `Email: <b>${row.email}</b>`,
                                           icon: "success",
                                         });
                                         async function fetchUsers() {
@@ -182,12 +183,13 @@ export default function StickyHeadTable({ rows }: { rows: Users }) {
                                         );
                                       })
                                       .catch((error) => {
-                                        swal({
-                                          title:
-                                            "User " +
-                                            row.name +
-                                            " was NOT deleted.",
-                                          text: "Error: " + error?.message,
+                                        Swal.fire({
+                                          title: "User was NOT deleted.",
+                                          html:
+                                            `Error: <b>${error?.message}</b> <br/>` +
+                                            `Name: <b>${row.name}</b> <br/>` +
+                                            `Role: <b>${row.role}</b> <br/>` +
+                                            `Email: <b>${row.email}</b>`,
                                           icon: "error",
                                         });
                                         console.error("error", error);
