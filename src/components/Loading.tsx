@@ -1,11 +1,22 @@
+import { Box, CircularProgress } from "@mui/material";
 import React from "react";
 
 const Loading = () => {
   return (
-    <div className="spinner">
-      <div className="double-bounce1"></div>
-      <div className="double-bounce2"></div>
-    </div>
+    <Box
+      sx={{
+        width: "100%",
+        height: "100vh",
+        background: "rgba(255,255,255,0.3)",
+        position: "fixed",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        zIndex: "100",
+      }}
+    >
+      <CircularProgress size={100} />
+    </Box>
   );
 };
 
